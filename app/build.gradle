@@ -16,6 +16,12 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
+        // Get the API keys from local.properties
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        // Set API keys in BuildConfig
+        buildConfigField "String", "API_KEY", "\"${properties.getProperty("API_KEY")}\""
 
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

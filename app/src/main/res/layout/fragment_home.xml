@@ -39,6 +39,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
+                android:alpha="0.5"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
                 android:src="#ED665C"
@@ -91,12 +92,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chaptersRV"
-        android:layout_marginTop="@dimen/_12sdp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chaptersRV"
+            tools:listitem="@layout/chapter_item"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+
+
 
 
 

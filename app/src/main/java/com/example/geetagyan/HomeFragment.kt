@@ -8,20 +8,23 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
+import com.example.geetagyan.databinding.FragmentHomeBinding
 
 
 class HomeFragment : Fragment() {
 
 
-
+    private lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding =FragmentHomeBinding.inflate(layoutInflater)
+
         changeStatusBarColor()
 
 
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return binding.root
     }
 
 
