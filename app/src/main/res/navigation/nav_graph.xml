@@ -18,5 +18,14 @@
         android:id="@+id/homeFragment"
         android:name="com.example.geetagyan.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_verses_fragment"
+            app:destination="@id/verses_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verses_fragment"
+        android:name="com.example.geetagyan.verses_fragment"
+        android:label="fragment_verses_fragment"
+        tools:layout="@layout/fragment_verses_fragment" />
 </navigation>

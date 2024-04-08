@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.geetagyan.databinding.FragmentHomeBinding
 import com.example.geetagyan.models.ChaptersItem
+import com.example.geetagyan.view.adapters.AdapterChapters
 import com.example.geetagyan.viewmodel.MainViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -23,25 +24,51 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     val viewmodel : MainViewModel by viewModels()
+    private lateinit var adapterChapters: AdapterChapters
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding =FragmentHomeBinding.inflate(layoutInflater)
-        getAllChapters()
 
+        checkInternetConnectivity()
         changeStatusBarColor()
 
 
         return binding.root
     }
 
+    private fun checkInternetConnectivity() {
+        val networkManager =NetworkManager(requireContext())
+        networkManager.observe(viewLifecycleOwner){
+            if(it ==true){
+                binding.shimmerLayout.visibility =View.VISIBLE
+                //binding.chaptersRV.visibility =View.VISIBLE
+                getAllChapters()
+
+
+            }else{
+
+                binding.shimmerLayout.visibility =View.GONE
+                binding.chaptersRV.visibility =View.GONE
+
+                /*
+                * show something here like please turn your internet on
+                * */
+
+            }
+
+        }
+    }
+
     private fun getAllChapters() {
         lifecycleScope.launch {
             viewmodel.getAllChapters().collect{chapterList->
-                for(i in chapterList){
-                    Log.d("TAG",i.toString())
-                }
+                adapterChapters = AdapterChapters()
+                binding.chaptersRV.adapter=adapterChapters
+                adapterChapters.differ.submitList(chapterList)
+                binding.shimmerLayout.visibility=View.GONE
+                binding.chaptersRV.visibility=View.VISIBLE
             }
         }
 
