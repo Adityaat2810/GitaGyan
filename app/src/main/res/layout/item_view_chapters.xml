@@ -11,14 +11,14 @@
     <TextView
         android:textColor="@color/black"
         android:id="@+id/number"
-        android:textSize="18sp"
+        android:textSize="@dimen/_14sdp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="chapter number" />
     <TextView
         android:id="@+id/name"
-        android:textSize="18sp"
+        android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/_12sdp"
         android:text="TextView" />
 
 
