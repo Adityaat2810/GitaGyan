@@ -9,37 +9,41 @@
 
 
     <TextView
-        android:textColor="@color/black"
         android:id="@+id/number"
+        android:alpha=".1"
+
         android:textSize="18sp"
+        android:background="#FF22FB"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="chapter number" />
+        android:layout_height="@dimen/_18sdp"
+        android:text="" />
     <TextView
         android:id="@+id/name"
         android:textSize="18sp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:alpha=".1"
+
         android:textStyle="bold"
+        android:background="#FF22FB"
         android:gravity="center"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="@dimen/_18sdp"
+        android:text="" />
 
     <TextView
         android:id="@+id/des"
-        android:layout_margin="5dp"
+
+        android:layout_marginTop="@dimen/_5sdp"
+        android:width="@dimen/_18sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_18sdp"
+        android:alpha=".1"
         android:textSize="20sp"
-        android:text="TextView" />
+        android:background="#FF22FB"
+        android:text="" />
 
 
-    <TextView
-        android:textColor="#FF22"
-        android:id="@+id/verse_count"
-        android:layout_margin="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="56" />
+
 </LinearLayout>

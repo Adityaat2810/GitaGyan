@@ -117,9 +117,12 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="match_parent">
-                <include layout="@layout/item_view_chapters" />
-                <include layout="@layout/item_view_chapters" />
-                <include layout="@layout/item_view_chapters" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
 
             </LinearLayout>
 
