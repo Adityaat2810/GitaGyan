@@ -22,9 +22,19 @@ class verses_fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentVersesFragmentBinding.inflate(layoutInflater)
-
+        getAndSetChapterDetails()
         getAllVerses()
         return binding.root
+    }
+
+    private fun getAndSetChapterDetails() {
+        // this line ,must remain in onCreate
+        val bundle = arguments
+        binding.chNumber.text = "Chapter ${bundle?.getInt("chapterNumber")}"
+        binding.chName.text = bundle?.getString("chapterTitle")
+        binding.chDes.text = bundle?.getString("chapterDes")
+        binding.verseCount.text ="Verse Count ${bundle?.getInt("versesCount")}"
+
     }
 
     private fun getAllVerses() {

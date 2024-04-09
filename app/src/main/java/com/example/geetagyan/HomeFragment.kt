@@ -76,7 +76,13 @@ class HomeFragment : Fragment() {
 
     private fun onChapterItemView(chaptersItem: ChaptersItem){
 
-        findNavController().navigate(R.id.action_homeFragment_to_verses_fragment)
+        val bundle = Bundle()
+        bundle.putInt("chapterNumber",chaptersItem.chapter_number)
+        bundle.putString("chapterTitle",chaptersItem.name_translated)
+        bundle.putString("chapterDes",chaptersItem.chapter_summary)
+        bundle.putInt("versesCount",chaptersItem.verses_count)
+
+        findNavController().navigate(R.id.action_homeFragment_to_verses_fragment,bundle)
 
     }
     private fun changeStatusBarColor() {
