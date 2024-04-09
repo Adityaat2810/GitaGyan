@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/chNumber"
         android:layout_width="match_parent"
-        android:textColor="#FF11"
+        android:textColor="#FF5722"
         android:textSize="@dimen/_16sdp"
         android:gravity="center"
         android:padding="@dimen/_5sdp"
@@ -32,27 +32,28 @@
     <TextView
         android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/chDes"
+        android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_width="match_parent"
-        android:textSize="@dimen/_13sdp"
-        android:gravity="center"
+        android:textSize="@dimen/_10sdp"
         android:maxLines="4"
         android:paddingHorizontal="@dimen/_5sdp"
         android:text="The first chapter of the Bhagavad Gita - Arjuna Vishada Yoga introduces the setup, the setting, the characters and the circumstances that led to the epic battle of Mahabharata, fought between the Pandavas and the Kauravas. It outlines the reasons that led to the revelation of the of Bhagavad Gita.\nAs both armies stand ready for the battle, the mighty warrior Arjuna, on observing the warriors on both sides becomes increasingly sad and depressed due to the fear of losing his relatives and friends and the consequent sins attributed to killing his own relatives. So, he surrenders to Lord Krishna, seeking a solution. Thus, follows the wisdom of the Bhagavad Git"
         android:layout_height="wrap_content"
         />
     <TextView
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/readMore"
         android:layout_width="match_parent"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_13sdp"
         android:text="Read more"
         android:textColor="#52A7EB"
-        android:paddingHorizontal="@dimen/_5sdp"
         android:layout_height="wrap_content"
         />
 
     <TextView
-        android:textColor="#9C27B0"
+        android:textColor="#FF9800"
         android:text="VERSES"
         android:layout_width="match_parent"
         android:textSize="@dimen/_16sdp"
@@ -62,7 +63,7 @@
         />
     <TextView
         android:id="@+id/verse_count"
-        android:textColor="#9C27B0"
+        android:textColor="#FF9800"
         android:text="Verse Count -34"
         android:paddingHorizontal="@dimen/_12sdp"
         android:layout_width="match_parent"
