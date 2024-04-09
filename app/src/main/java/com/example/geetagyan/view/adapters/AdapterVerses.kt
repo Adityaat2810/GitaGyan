@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.geetagyan.databinding.VersesItemBinding
 
-class AdapterVerses:RecyclerView.Adapter<AdapterVerses.VerseViewHolder>() {
+class AdapterVerses(val onVerseItemClick: (String, Int) -> Unit) :RecyclerView.Adapter<AdapterVerses.VerseViewHolder>() {
     class VerseViewHolder(val binding:VersesItemBinding):ViewHolder(binding.root)
 
 
@@ -36,5 +36,9 @@ class AdapterVerses:RecyclerView.Adapter<AdapterVerses.VerseViewHolder>() {
         val verse = differ.currentList[position]
         holder.binding.name.text = "VERSE ${position+1}"
         holder.binding.des.text = verse
+
+        holder.binding.ll.setOnClickListener {
+            onVerseItemClick(verse , position+1)
+        }
     }
 }

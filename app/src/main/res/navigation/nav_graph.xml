@@ -27,5 +27,14 @@
         android:id="@+id/verses_fragment"
         android:name="com.example.geetagyan.verses_fragment"
         android:label="fragment_verses_fragment"
-        tools:layout="@layout/fragment_verses_fragment" />
+        tools:layout="@layout/fragment_verses_fragment" >
+        <action
+            android:id="@+id/action_verses_fragment_to_verseDetail"
+            app:destination="@id/verseDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/verseDetail"
+        android:name="com.example.geetagyan.VerseDetail"
+        android:label="fragment_verse_detail"
+        tools:layout="@layout/fragment_verse_detail" />
 </navigation>
