@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.geetagyan.databinding.ItemViewChaptersBinding
 import com.example.geetagyan.models.ChaptersItem
 
-class AdapterChapters:RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>() {
+class AdapterChapters(val onChapterItemView: (ChaptersItem) -> Unit) :RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>() {
 
     class ChaptersViewHolder(val binding:ItemViewChaptersBinding):ViewHolder(binding.root)
 
@@ -45,6 +45,11 @@ class AdapterChapters:RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>()
             des.text=chapter.chapter_summary
             verseCount.text=chapter.verses_count.toString()
             // des name number
+        }
+
+        holder.binding.ll.setOnClickListener {
+            // fuction will be call from here now
+            onChapterItemView(chapter)  // passing the current chapter
         }
     }
 

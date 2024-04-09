@@ -1,7 +1,6 @@
 package com.example.geetagyan
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +10,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.geetagyan.databinding.FragmentHomeBinding
 import com.example.geetagyan.models.ChaptersItem
 import com.example.geetagyan.view.adapters.AdapterChapters
 import com.example.geetagyan.viewmodel.MainViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 
@@ -64,7 +63,7 @@ class HomeFragment : Fragment() {
     private fun getAllChapters() {
         lifecycleScope.launch {
             viewmodel.getAllChapters().collect{chapterList->
-                adapterChapters = AdapterChapters()
+                adapterChapters = AdapterChapters(::onChapterItemView)  // passing function as constructor to adapter
                 binding.chaptersRV.adapter=adapterChapters
                 adapterChapters.differ.submitList(chapterList)
                 binding.shimmerLayout.visibility=View.GONE
@@ -75,6 +74,11 @@ class HomeFragment : Fragment() {
     }
 
 
+    private fun onChapterItemView(chaptersItem: ChaptersItem){
+
+        findNavController().navigate(R.id.action_homeFragment_to_verses_fragment)
+
+    }
     private fun changeStatusBarColor() {
 
         val window = activity?.window
