@@ -60,7 +60,11 @@ class verses_fragment : Fragment() {
     }
 
     private fun onVerseItemViewClick(verse:String,verseNumber:Int){
-        findNavController().navigate(R.id.action_verses_fragment_to_verseDetail)
+        val bundle = Bundle()
+        bundle.putInt("chapterNum",chapterNumber)
+        bundle.putInt("verseNum",verseNumber)
+
+        findNavController().navigate(R.id.action_verses_fragment_to_verseDetail,bundle)
 
     }
 

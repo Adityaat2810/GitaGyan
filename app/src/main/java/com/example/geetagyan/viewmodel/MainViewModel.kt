@@ -14,4 +14,6 @@ class MainViewModel:ViewModel() {
     fun getVerses(chapterNumber: Int): Flow<List<VersesItem>> =
         appRepository.getVerses(chapterNumber)
 
+
+    fun getParticularVerse(chapterNumber: Int,verseNumber: Int):Flow<VersesItem> = appRepository.getParticularVerse(chapterNumber,verseNumber)
 }

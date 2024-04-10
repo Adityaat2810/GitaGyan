@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".VerseDetail">
@@ -15,6 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="BG 3.1" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="match_parent"
+        android:indeterminate="true"
+        android:indeterminateTint="#FF5722"
+        app:indicatorColor="#FF5722"
+        app:trackColor="@color/white"
+        android:visibility="visible"
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -62,33 +73,56 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_marginHorizontal="@dimen/_5sdp"
-
+                android:layout_margin="@dimen/_5sdp"
                 android:elevation="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
 
-                android:background="@drawable/cardview_border"
+                app:cardPreventCornerOverlap="false"
+                app:cardMaxElevation="@dimen/_5sdp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="@dimen/_5sdp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_height="wrap_content">
 
-
-                <TextView
-
-                    android:id="@+id/trans"
-                    android:textColor="@color/black"
-                    android:padding="@dimen/_5sdp"
-                    android:text="Translation"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:textSize="@dimen/_14sdp"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:weightSum="3"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/trans"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Translation"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/authorTranslation"
+                        android:textColor="#FF5722"
+                        android:padding="@dimen/_5sdp"
+                        android:text="-by Author"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
 
                 <TextView
-
                     android:id="@+id/translation"
-                    android:textColor="@color/black"
                     android:padding="@dimen/_5sdp"
                     android:text="Arjuna said: If Thou thinkest that knowledge is superior to action, O Krishna, why then, O Kesava, doest Thou ask me to engage in this terrible action?"
                     android:gravity="center"
@@ -98,7 +132,135 @@
                     android:layout_height="wrap_content"/>
 
 
+
+
+
             </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/prevTranslation"
+                    android:visibility="gone"
+                    android:src="@drawable/prevoius"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    />
+
+                <ImageView
+                    android:id="@+id/nextTransaltion"
+                    android:src="@drawable/next"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_margin="@dimen/_5sdp"
+                android:elevation="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardPreventCornerOverlap="false"
+                app:cardMaxElevation="@dimen/_5sdp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="@dimen/_5sdp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:weightSum="3"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/commentaryHeading"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Commentary"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/authorCommentary"
+                        android:textColor="#FF5722"
+                        android:padding="@dimen/_5sdp"
+                        android:text="-by Author"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+
+
+
+
+
+                <TextView
+                    android:id="@+id/commentary"
+                    android:text="3.1 ज्यायसी superior? चेत् if? कर्मणः than action? ते by Thee? मता thought? बुद्धिः knowledge? जनार्दन O Janardana? तत् then? किम् why? कर्मणि in action? घोरे terrible? माम् me? नियोजयसि Thou engagest? केशव O Kesava.Commentary In verses 49? 50 and 51 of chapter II? Lord Krsihna has spoken very highly about Buddhi Yoga. He again asks Arjuna to fight. That is the reason why Arjuna is perplexed now. "
+                    android:padding="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/prevCommentary"
+                    android:src="@drawable/prevoius"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    />
+
+                <ImageView
+                    android:id="@+id/nextCommentary"
+                    android:src="@drawable/next"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    />
+
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

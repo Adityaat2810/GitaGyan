@@ -70,4 +70,23 @@ class ApiRepository {
         ApiUtilities.api.getVerses(chapterNumber).enqueue(callback)
         awaitClose{}  // app will crash without this
     }
+
+    fun getParticularVerse(chapterNumber: Int,verseNumber: Int):Flow<VersesItem> = callbackFlow {
+        val callback = object :Callback<VersesItem>{
+            override fun onResponse(call: Call<VersesItem>, response: Response<VersesItem>) {
+
+                if(response.isSuccessful && response.body() != null){
+                    trySend(response.body()!!)
+                    close()
+                }
+            }
+
+            override fun onFailure(call: Call<VersesItem>, t: Throwable) {
+                close(t)
+            }
+
+        }
+        ApiUtilities.api.getParticularVerse(chapterNumber,verseNumber).enqueue(callback)
+        awaitClose{}
+    }
 }
