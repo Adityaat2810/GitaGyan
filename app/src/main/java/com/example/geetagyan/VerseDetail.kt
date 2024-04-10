@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.geetagyan.databinding.FragmentVerseDetailBinding
+import com.example.geetagyan.models.Commentary
 import com.example.geetagyan.models.Translation
 import com.example.geetagyan.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
+import retrofit2.http.GET
 
 class VerseDetail : Fragment() {
 
@@ -24,7 +26,7 @@ class VerseDetail : Fragment() {
     ): View? {
         binding = FragmentVerseDetailBinding.inflate(layoutInflater)
         getAndSetChapterAndVerseNumber()
-        getVerseDetails()
+        checkInternetConnectivity()
         return binding.root
 
     }
@@ -77,8 +79,73 @@ class VerseDetail : Fragment() {
                             }
                         }
                     }
+
+
                 }
+
+                val englishCommentryList = arrayListOf<Commentary>()
+                for(i in verse.commentaries){
+                    if(i.language =="hindi" || i.language=="english"){
+                        englishCommentryList.add(i)
+                    }
+                }
+                val englishCommentryListSize = englishCommentryList.size
+                if(englishCommentryList.isNotEmpty()){
+                    binding.authorCommentary.text = englishCommentryList[0].author_name
+                    binding.commentary.text = englishCommentryList[0].description
+
+                    if(englishCommentryListSize ==1){
+                        binding.nextCommentary.visibility =View.GONE
+                    }
+
+                    var i = 0
+                    binding.nextCommentary.setOnClickListener {
+                        if(i <englishCommentryListSize -1){
+                            i++
+                            binding.authorCommentary.text ="-by ${englishCommentryList[i].author_name}"
+                            binding.commentary.text = englishCommentryList[i].description
+                            binding.prevCommentary.visibility = View.VISIBLE
+
+                            if(i == englishCommentryListSize-1){
+                                binding.nextCommentary.visibility =View.GONE
+                            }
+                        }
+                    }
+
+
+                    binding.prevCommentary.setOnClickListener {
+                        if(i>0){
+                            i--
+                            binding.authorCommentary.text ="-by ${englishCommentryList[i].author_name}"
+                            binding.commentary.text = englishCommentryList[i].description
+                            binding.nextCommentary.visibility =View.VISIBLE
+
+                            if(i == 0){
+                                binding.prevCommentary.visibility =View.GONE
+                            }
+                        }
+                    }
+
+                }
+                binding.progressIndicator.visibility=View.GONE
+                binding.tv.visibility =View.GONE
+                binding.linearLayout.visibility=View.VISIBLE
+
             }
+        }
+    }
+
+    private fun checkInternetConnectivity() {
+        val networkManager =NetworkManager(requireContext())
+        networkManager.observe(viewLifecycleOwner){
+            if(it ==true){
+                getVerseDetails()
+            }else{
+                binding.progressIndicator.visibility=View.VISIBLE
+                binding.linearLayout.visibility=View.GONE
+                binding.tv.visibility =View.GONE
+            }
+
         }
     }
 
