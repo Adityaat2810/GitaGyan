@@ -1,5 +1,6 @@
 package com.example.geetagyan.repository
 
+import androidx.lifecycle.LiveData
 import com.example.geetagyan.datasource.api.ApiUtilities
 import com.example.geetagyan.datasource.room.savedChapters
 import com.example.geetagyan.datasource.room.savedChaptersDao
@@ -94,5 +95,8 @@ class ApiRepository(val savedChaptersDao: savedChaptersDao) {
 
 
     suspend fun insertChapters(savedChapters: savedChapters) =savedChaptersDao.insertChapters(savedChapters)
+
+    fun getSavedChapters(): LiveData<List<savedChapters>> =savedChaptersDao.getSavedChapters()
+
 
 }

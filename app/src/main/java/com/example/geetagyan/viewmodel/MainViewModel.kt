@@ -2,6 +2,7 @@ package com.example.geetagyan.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.geetagyan.datasource.room.AppDatabase
 import com.example.geetagyan.datasource.room.savedChapters
@@ -24,5 +25,8 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
 
     //savedchapters
     suspend fun insertChapters(savedChapters: savedChapters) =appRepository.insertChapters(savedChapters)
+
+    fun getSavedChapters(): LiveData<List<savedChapters>> =appRepository.getSavedChapters()
+
 
 }
