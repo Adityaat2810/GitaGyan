@@ -4,7 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class TypeConvertors {
+class AppTypeConvertors {
     // we do need to call these function anywhere {room use them whenever non recognizable datatype is found }
     // as mysql store only primitive data types not List
     @TypeConverter

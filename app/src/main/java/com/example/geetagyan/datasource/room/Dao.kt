@@ -18,5 +18,5 @@ interface savedChaptersDao {
     fun deleteParticularChapter(id:Int)
 
     @Query("SELECT * from savedChapters WHERE chapter_number=:chapterNumber")
-    fun getParticularChapter(chapterNumber:Int)
+    fun getParticularChapter(chapterNumber: Int): LiveData<savedChapters>
 }

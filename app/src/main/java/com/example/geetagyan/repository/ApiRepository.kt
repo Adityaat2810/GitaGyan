@@ -1,6 +1,8 @@
 package com.example.geetagyan.repository
 
 import com.example.geetagyan.datasource.api.ApiUtilities
+import com.example.geetagyan.datasource.room.savedChapters
+import com.example.geetagyan.datasource.room.savedChaptersDao
 import com.example.geetagyan.models.ChaptersItem
 import com.example.geetagyan.models.VersesItem
 import kotlinx.coroutines.channels.awaitClose
@@ -11,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ApiRepository {
+class ApiRepository(val savedChaptersDao: savedChaptersDao) {
     /*
     REPO(get ,fetch ,save logic)
 
@@ -89,4 +91,8 @@ class ApiRepository {
         ApiUtilities.api.getParticularVerse(chapterNumber,verseNumber).enqueue(callback)
         awaitClose{}
     }
+
+
+    suspend fun insertChapters(savedChapters: savedChapters) =savedChaptersDao.insertChapters(savedChapters)
+
 }

@@ -12,8 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.geetagyan.databinding.FragmentHomeBinding
+import com.example.geetagyan.datasource.room.savedChapters
 import com.example.geetagyan.models.ChaptersItem
 import com.example.geetagyan.view.adapters.AdapterChapters
+import com.example.geetagyan.view.adapters.AdapterVerses
 import com.example.geetagyan.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -63,7 +65,7 @@ class HomeFragment : Fragment() {
     private fun getAllChapters() {
         lifecycleScope.launch {
             viewmodel.getAllChapters().collect{chapterList->
-                adapterChapters = AdapterChapters(::onChapterItemView)  // passing function as constructor to adapter
+                adapterChapters = AdapterChapters(::onChapterItemView,::onDownloadClick)  // passing function as constructor to adapter
                 binding.chaptersRV.adapter=adapterChapters
                 adapterChapters.differ.submitList(chapterList)
                 binding.shimmerLayout.visibility=View.GONE
@@ -83,6 +85,44 @@ class HomeFragment : Fragment() {
         bundle.putInt("versesCount",chaptersItem.verses_count)
 
         findNavController().navigate(R.id.action_homeFragment_to_verses_fragment,bundle)
+
+    }
+
+    fun onDownloadClick(chaptersItem: ChaptersItem){
+
+        lifecycleScope.launch {
+            viewmodel.getVerses(chaptersItem.chapter_number).collect{
+                val verseList = arrayListOf<String>()
+
+                for(currentVerse in it ){
+                    for (verse in currentVerse.translations){
+                        if(verse.language == "english"){
+                            verseList.add(verse.description)
+                            break
+                        }
+                    }
+                }
+
+                val savedchapters =savedChapters(
+                    chapter_number = chaptersItem.chapter_number,
+                    chapter_summary = chaptersItem.chapter_summary,
+                    chapter_summary_hindi = chaptersItem.chapter_summary_hindi,
+                    id=chaptersItem.id,
+                    name = chaptersItem.name,
+                    name_meaning = chaptersItem.name_meaning,
+                    name_translated = chaptersItem.name_translated,
+                    name_transliterated = chaptersItem.name_transliterated,
+                    slug =chaptersItem.slug,
+                    verses_count = chaptersItem.verses_count,
+                    verses = verseList
+                    )
+
+                viewmodel.insertChapters(savedchapters)
+
+            }
+        }
+
+
 
     }
     private fun changeStatusBarColor() {
