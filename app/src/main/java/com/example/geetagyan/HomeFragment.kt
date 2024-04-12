@@ -35,6 +35,10 @@ class HomeFragment : Fragment() {
         checkInternetConnectivity()
         changeStatusBarColor()
 
+        binding.ivSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
+
 
         return binding.root
     }

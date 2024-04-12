@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".settingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/savedChapters"
+        android:background="#FF5722"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:backgroundTint="#FF5722"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:textSize="@dimen/_16sdp"
+        android:layout_marginHorizontal="@dimen/_18sdp"
+        android:layout_height="wrap_content"
+        android:text="Saved Chapters "
+        />
 
-</FrameLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/savedVerses"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="#FF5722"
+        android:layout_marginHorizontal="@dimen/_18sdp"
+        android:backgroundTint="#FF5722"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/_16sdp"
+        android:layout_height="wrap_content"
+        android:text="Saved Verses "
+        />
+
+
+
+</LinearLayout>
