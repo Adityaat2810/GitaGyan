@@ -15,7 +15,6 @@ import com.example.geetagyan.databinding.FragmentHomeBinding
 import com.example.geetagyan.datasource.room.savedChapters
 import com.example.geetagyan.models.ChaptersItem
 import com.example.geetagyan.view.adapters.AdapterChapters
-import com.example.geetagyan.view.adapters.AdapterVerses
 import com.example.geetagyan.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -69,7 +68,7 @@ class HomeFragment : Fragment() {
     private fun getAllChapters() {
         lifecycleScope.launch {
             viewmodel.getAllChapters().collect{chapterList->
-                adapterChapters = AdapterChapters(::onChapterItemView,::onDownloadClick)  // passing function as constructor to adapter
+                adapterChapters = AdapterChapters(::onChapterItemView, ::onDownloadClick, true)  // passing function as constructor to adapter
                 binding.chaptersRV.adapter=adapterChapters
                 adapterChapters.differ.submitList(chapterList)
                 binding.shimmerLayout.visibility=View.GONE

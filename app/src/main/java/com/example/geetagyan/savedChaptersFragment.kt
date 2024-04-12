@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.geetagyan.databinding.FragmentSavedChaptersBinding
-import com.example.geetagyan.databinding.FragmentSettingsBinding
 import com.example.geetagyan.models.ChaptersItem
 import com.example.geetagyan.view.adapters.AdapterChapters
 import com.example.geetagyan.viewmodel.MainViewModel
@@ -55,7 +55,7 @@ class savedChaptersFragment : Fragment() {
                 binding.chaptersRV.visibility =View.GONE
             }
 
-            adapterChapters = AdapterChapters(::onChapterItemViewClicked,::onFavourateClicked)
+            adapterChapters = AdapterChapters(::onChapterItemViewClicked,::onFavourateClicked,false)
             binding.chaptersRV.adapter =adapterChapters
             adapterChapters.differ.submitList(chapterList)
 
@@ -66,6 +66,11 @@ class savedChaptersFragment : Fragment() {
     }
 
     fun onChapterItemViewClicked(chaptersItem: ChaptersItem){
+        val bundle =Bundle()
+        bundle.putInt("chapterNumber",chaptersItem.chapter_number)
+        bundle.putBoolean("showRoomData",true)
+        findNavController().navigate(R.id.action_savedChaptersFragment_to_verses_fragment,bundle)
+
 
     }
 

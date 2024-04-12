@@ -28,5 +28,8 @@ class MainViewModel(application: Application):AndroidViewModel(application) {
 
     fun getSavedChapters(): LiveData<List<savedChapters>> =appRepository.getSavedChapters()
 
+    fun getParticularChapter(chapterNumber: Int): LiveData<savedChapters> =appRepository.getParticularChapter(chapterNumber)
+
+
 
 }

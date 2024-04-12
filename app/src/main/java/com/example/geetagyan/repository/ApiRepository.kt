@@ -98,5 +98,7 @@ class ApiRepository(val savedChaptersDao: savedChaptersDao) {
 
     fun getSavedChapters(): LiveData<List<savedChapters>> =savedChaptersDao.getSavedChapters()
 
+    fun getParticularChapter(chapterNumber: Int): LiveData<savedChapters> =savedChaptersDao.getParticularChapter(chapterNumber)
+
 
 }

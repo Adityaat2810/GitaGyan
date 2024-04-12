@@ -28,8 +28,34 @@ class verses_fragment : Fragment() {
         binding = FragmentVersesFragmentBinding.inflate(layoutInflater)
         getAndSetChapterDetails()
         onReadMoreClick()
-        checkInternetConnectivity()
+
+        getData()
+
         return binding.root
+    }
+
+    private fun getData() {
+        val bundle =arguments
+        val showDataFromRoom = bundle?.getBoolean("showRoomData",false)
+
+        if(showDataFromRoom == true){
+            getDataFromRoom()
+        }else{
+            checkInternetConnectivity()
+        }
+
+    }
+
+    private fun getDataFromRoom() {
+        viewModel.getParticularChapter(chapterNumber).observe(viewLifecycleOwner){
+            binding.chNumber.text = "Chapter ${it.chapter_number}"
+            binding.chName.text = it.name_translated
+            binding.chDes.text =it.chapter_summary
+            binding.verseCount.text = it.verses_count.toString()
+
+            showListInAdapter(it.verses!!)
+
+        }
     }
 
     private fun onReadMoreClick() {
@@ -71,8 +97,7 @@ class verses_fragment : Fragment() {
     private fun getAllVerses() {
         lifecycleScope.launch {
             viewModel.getVerses(chapterNumber).collect{
-                versesAdapter = AdapterVerses(::onVerseItemViewClick)
-                binding.versesRv.adapter = versesAdapter
+
                 val verseList = arrayListOf<String>()
 
                 for(currentVerse in it ){
@@ -84,11 +109,21 @@ class verses_fragment : Fragment() {
                     }
                 }
 
-                versesAdapter.differ.submitList(verseList)
-                binding.shimmerLayout.visibility=View.GONE
-                binding.versesRv.visibility=View.VISIBLE
+                showListInAdapter(verseList)
+
+
             }
         }
+
+    }
+
+    private fun showListInAdapter(verseList: List<String>) {
+        versesAdapter = AdapterVerses(::onVerseItemViewClick)
+        binding.versesRv.adapter = versesAdapter
+
+        versesAdapter.differ.submitList(verseList)
+        binding.shimmerLayout.visibility=View.GONE
+        binding.versesRv.visibility=View.VISIBLE
 
     }
 

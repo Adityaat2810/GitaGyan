@@ -1,6 +1,7 @@
 package com.example.geetagyan.view.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +12,8 @@ import com.example.geetagyan.models.ChaptersItem
 
 class AdapterChapters(
     val onChapterItemView: (ChaptersItem) -> Unit,
-    val onDownloadClick: (ChaptersItem) -> Unit
+    val onDownloadClick: (ChaptersItem) -> Unit,
+    val show: Boolean
 ) :RecyclerView.Adapter<AdapterChapters.ChaptersViewHolder>() {
 
     class ChaptersViewHolder(val binding:ItemViewChaptersBinding):ViewHolder(binding.root)
@@ -48,6 +50,12 @@ class AdapterChapters(
             des.text=chapter.chapter_summary
             verseCount.text=chapter.verses_count.toString()
             // des name number
+        }
+
+        if(!show){
+            holder.binding.apply {
+                download.visibility = View.GONE
+            }
         }
 
         holder.binding.ll.setOnClickListener {
