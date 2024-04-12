@@ -1,6 +1,7 @@
 package com.example.geetagyan
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,7 @@ class VerseDetail : Fragment() {
                 binding.sanskritText.text = verse.text
                 binding.englishText.text =verse.transliteration
                 binding.englishMeaning.text = verse.word_meanings
+                Log.d("API",verse.toString())
 
                 val enslishTransaltionList = arrayListOf<Translation>()
                 for(i in verse.translations){

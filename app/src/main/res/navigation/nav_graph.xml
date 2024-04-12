@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_verses_fragment"
             app:destination="@id/verses_fragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/verses_fragment"
@@ -37,4 +40,34 @@
         android:name="com.example.geetagyan.VerseDetail"
         android:label="fragment_verse_detail"
         tools:layout="@layout/fragment_verse_detail" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.geetagyan.settingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_savedVersesFragment"
+            app:destination="@id/savedVersesFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_savedChaptersFragment"
+            app:destination="@id/savedChaptersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedChaptersFragment"
+        android:name="com.example.geetagyan.savedChaptersFragment"
+        android:label="fragment_saved_chapters"
+        tools:layout="@layout/fragment_saved_chapters" >
+        <action
+            android:id="@+id/action_savedChaptersFragment_to_verses_fragment"
+            app:destination="@id/verses_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedVersesFragment"
+        android:name="com.example.geetagyan.SavedVersesFragment"
+        android:label="fragment_saved_verses"
+        tools:layout="@layout/fragment_saved_verses" >
+        <action
+            android:id="@+id/action_savedVersesFragment_to_verseDetail"
+            app:destination="@id/verseDetail" />
+    </fragment>
 </navigation>
