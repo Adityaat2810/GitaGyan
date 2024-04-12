@@ -53,7 +53,7 @@ class verses_fragment : Fragment() {
             binding.chDes.text =it.chapter_summary
             binding.verseCount.text = it.verses_count.toString()
 
-            showListInAdapter(it.verses!!)
+            showListInAdapter(it.verses!!,false)
 
         }
     }
@@ -109,7 +109,7 @@ class verses_fragment : Fragment() {
                     }
                 }
 
-                showListInAdapter(verseList)
+                showListInAdapter(verseList,true)
 
 
             }
@@ -117,8 +117,8 @@ class verses_fragment : Fragment() {
 
     }
 
-    private fun showListInAdapter(verseList: List<String>) {
-        versesAdapter = AdapterVerses(::onVerseItemViewClick)
+    private fun showListInAdapter(verseList: List<String>,OnClick:Boolean) {
+        versesAdapter = AdapterVerses(::onVerseItemViewClick,OnClick)
         binding.versesRv.adapter = versesAdapter
 
         versesAdapter.differ.submitList(verseList)
