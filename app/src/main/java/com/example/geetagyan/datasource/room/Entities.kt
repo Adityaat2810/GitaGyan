@@ -2,9 +2,11 @@ package com.example.geetagyan.datasource.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.geetagyan.models.Commentary
+import com.example.geetagyan.models.Translation
 
 
-    @Entity(tableName = "savedChapters")
+@Entity(tableName = "savedChapters")
     data class savedChapters(
         val chapter_number: Int,
         val chapter_summary: String,
@@ -18,6 +20,20 @@ import androidx.room.PrimaryKey
         val slug: String,
         val verses_count: Int,
         val verses:List<String>?
+    )
+
+    @Entity(tableName = "savedVerses")
+    data class savedVerses(
+        val chapter_number: Int,
+        val commentaries: List<Commentary>,
+        @PrimaryKey
+        val id: Int,
+        val slug: String,
+        val text: String,
+        val translations: List<Translation>,
+        val transliteration: String,
+        val verse_number: Int,
+        val word_meanings: String
     )
 
 

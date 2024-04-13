@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import com.example.geetagyan.databinding.FragmentVerseDetailBinding
+import com.example.geetagyan.datasource.room.savedVerses
 import com.example.geetagyan.models.Commentary
 import com.example.geetagyan.models.Translation
+import com.example.geetagyan.models.VersesItem
 import com.example.geetagyan.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 import retrofit2.http.GET
@@ -21,6 +24,7 @@ class VerseDetail : Fragment() {
     private val viewModel:MainViewModel by viewModels()
     var chapterNumber = 0
     var verseNumber = 0
+    private var versedet =MutableLiveData<VersesItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,13 +32,58 @@ class VerseDetail : Fragment() {
         binding = FragmentVerseDetailBinding.inflate(layoutInflater)
         getAndSetChapterAndVerseNumber()
         checkInternetConnectivity()
+        onSavedVerse()
         return binding.root
 
+    }
+
+    private fun onSavedVerse() {
+        binding.downloadVerse.setOnClickListener {
+            binding.downloadVerse.visibility = View.GONE
+            //show here downloaded imageView
+           savingVerseDetails()
+        }
+    }
+
+    private fun savingVerseDetails() {
+
+
+        versedet.observe(viewLifecycleOwner){
+            val enslishTransaltionList = arrayListOf<Translation>()
+            for(i in it.translations){
+                if(i.language =="english"){
+                    enslishTransaltionList.add(i)
+                }
+            }
+
+            val englishCommentryList = arrayListOf<Commentary>()
+            for(i in it.commentaries){
+                if(i.language =="hindi" || i.language=="english"){
+                    englishCommentryList.add(i)
+                }
+            }
+            val savedVerses=savedVerses(
+                it.chapter_number,
+                englishCommentryList,
+                it.id,
+                it.slug,
+                it.text,
+                enslishTransaltionList,
+                it.transliteration,
+                it.verse_number,
+                it.word_meanings
+            )
+
+            lifecycleScope.launch {
+                viewModel.insertVerseInenglish(savedVerses)
+            }
+        }
     }
 
     private fun getVerseDetails() {
         lifecycleScope.launch {
             viewModel.getParticularVerse(chapterNumber,verseNumber).collect{verse->
+                versedet.postValue(verse)
                 binding.sanskritText.text = verse.text
                 binding.englishText.text =verse.transliteration
                 binding.englishMeaning.text = verse.word_meanings

@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import com.example.geetagyan.datasource.api.ApiUtilities
 import com.example.geetagyan.datasource.room.savedChapters
 import com.example.geetagyan.datasource.room.savedChaptersDao
+import com.example.geetagyan.datasource.room.savedVerses
+import com.example.geetagyan.datasource.room.savedVersesDao
 import com.example.geetagyan.models.ChaptersItem
 import com.example.geetagyan.models.VersesItem
 import kotlinx.coroutines.channels.awaitClose
@@ -14,7 +16,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class ApiRepository(val savedChaptersDao: savedChaptersDao) {
+class ApiRepository(
+    val savedChaptersDao: savedChaptersDao,
+    val savedVersesDao: savedVersesDao
+) {
     /*
     REPO(get ,fetch ,save logic)
 
@@ -94,11 +99,19 @@ class ApiRepository(val savedChaptersDao: savedChaptersDao) {
     }
 
 
+    //saved chapters
     suspend fun insertChapters(savedChapters: savedChapters) =savedChaptersDao.insertChapters(savedChapters)
 
     fun getSavedChapters(): LiveData<List<savedChapters>> =savedChaptersDao.getSavedChapters()
 
     fun getParticularChapter(chapterNumber: Int): LiveData<savedChapters> =savedChaptersDao.getParticularChapter(chapterNumber)
 
+    //saved verses
+    suspend fun insertVerseInenglish(verseInEnglish: savedVerses) = savedVersesDao.insertVerseInenglish(verseInEnglish)
+    fun getSavedVerses():LiveData<List<savedVerses>> =savedVersesDao.getSavedVerses()
+
+    fun getParticularVerseFromRoom(chapterNumber: Int,verseNumber: Int):LiveData<savedVerses> = savedVersesDao.getParticularVerseFromRoom(chapterNumber,verseNumber)
+
+    fun deleteParticularVerse(chapterNumber: Int,verseNumber:Int) =savedVersesDao.deleteParticularVerse(chapterNumber,verseNumber)
 
 }
