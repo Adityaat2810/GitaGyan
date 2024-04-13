@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".SavedVersesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:textColor="#FF5722"
+        android:text="VERSES"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:textSize="@dimen/_16sdp"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/verse_count"
+        android:textColor="#FF5722"
+        android:text="Verse Count -34"
+        android:paddingHorizontal="@dimen/_12sdp"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/_13sdp"
+        android:padding="@dimen/_5sdp"
+        android:layout_height="wrap_content"
+        />
 
-</FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/versesRv"
+            tools:listitem="@layout/verses_item"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+
+
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+                <include layout="@layout/for_shimmer" />
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
